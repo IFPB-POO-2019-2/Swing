@@ -5,7 +5,7 @@ import com.ifpb.interfacegrafica.enumeration.Titulacao;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.text.ParseException;
 
 public class PrimeiraJanela extends JFrame {
@@ -34,12 +34,38 @@ public class PrimeiraJanela extends JFrame {
         inserirJComboBox(painel);
         inserirJButtons(painel);
 
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("Valeu valeu, falou falou");
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+                System.out.println("Foi ativada");
+            }
+        });
+
     }
 
     private void inserirJButtons(Container painel) {
         JButton botaoSalvar = new JButton("Salvar");
         botaoSalvar.setBounds(30, 230, 100,30);
         painel.add(botaoSalvar);
+
+        botaoSalvar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("Quantidade de cliques: "
+                        +e.getClickCount());
+                System.out.println("Local: "+e.getPoint());
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                System.out.println("Mouse entrou no componente");
+            }
+        });
 
         JButton botaoCancelar = new JButton("Cancelar");
         botaoCancelar.setBounds(150, 230, 100,30);
@@ -87,6 +113,18 @@ public class PrimeiraJanela extends JFrame {
         campoCpf.setBounds(130,70,250,30);
         if(mascaraCpf!=null)mascaraCpf.install(campoCpf);
         painel.add(campoCpf);
+
+        campoCpf.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int codigo = e.getKeyCode();
+                if(!((codigo>=96 && codigo<=105)||
+                        (codigo>=48 && codigo<=57))){
+                    JOptionPane.showMessageDialog(null,
+                            "O CPF só pode ter números");
+                }
+            }
+        });
 
         JTextField campoNome = new JTextField();
         campoNome.setBounds(130,100,250,30);
