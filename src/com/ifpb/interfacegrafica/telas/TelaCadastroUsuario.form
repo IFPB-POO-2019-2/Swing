@@ -48,7 +48,7 @@
           <text value="Repetir Senha"/>
         </properties>
       </component>
-      <component id="6e667" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="6e667" class="javax.swing.JTextField" binding="campoEmail">
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -56,7 +56,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="dbecd" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+      <component id="dbecd" class="javax.swing.JTextField" binding="campoNome">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -72,7 +72,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="f1e28" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
+      <component id="f1e28" class="javax.swing.JPasswordField" binding="campoSenha1">
         <constraints>
           <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -80,7 +80,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="b85af" class="javax.swing.JPasswordField" binding="passwordField2" default-binding="true">
+      <component id="b85af" class="javax.swing.JPasswordField" binding="campoSenha2">
         <constraints>
           <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
