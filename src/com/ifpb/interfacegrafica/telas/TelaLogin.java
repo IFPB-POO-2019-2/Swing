@@ -1,6 +1,8 @@
 package com.ifpb.interfacegrafica.telas;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TelaLogin extends JFrame {
     private JTextField textField1;
@@ -15,6 +17,10 @@ public class TelaLogin extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(painel);
         pack();
+        cadastrarButton.addActionListener(e -> {
+            TelaCadastroUsuario cadastroUsuario = new TelaCadastroUsuario();
+            cadastroUsuario.setVisible(true);
+        });
     }
 
     private void createUIComponents() {
