@@ -13,7 +13,7 @@
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="E-mail"/>
+          <text value="E-mail*"/>
         </properties>
       </component>
       <component id="24c93" class="javax.swing.JLabel">
@@ -21,7 +21,7 @@
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Nome"/>
+          <text value="Nome*"/>
         </properties>
       </component>
       <component id="a811d" class="javax.swing.JLabel">
@@ -29,7 +29,7 @@
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Nascimento"/>
+          <text value="Nascimento*"/>
         </properties>
       </component>
       <component id="4d669" class="javax.swing.JLabel">
@@ -37,7 +37,7 @@
           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Senha"/>
+          <text value="Senha*"/>
         </properties>
       </component>
       <component id="2102d" class="javax.swing.JLabel">
@@ -45,7 +45,7 @@
           <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Repetir Senha"/>
+          <text value="Repetir Senha*"/>
         </properties>
       </component>
       <component id="6e667" class="javax.swing.JTextField" binding="campoEmail">

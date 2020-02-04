@@ -1,12 +1,11 @@
 package com.ifpb.interfacegrafica.telas;
 
+import com.ifpb.interfacegrafica.dao.UsuarioDaoArquivo;
 import com.ifpb.interfacegrafica.dao.UsuarioDaoSet;
 import com.ifpb.interfacegrafica.modelo.Usuario;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.time.LocalDate;
+import java.io.IOException;
 
 public class TelaLogin extends JFrame {
     private JTextField campoEmail;
@@ -15,28 +14,40 @@ public class TelaLogin extends JFrame {
     private JButton cadastrarButton;
     private JPanel painel;
     private JLabel loginImagem;
-    private UsuarioDaoSet usuarioDao;
+    private UsuarioDaoArquivo usuarioDao;
 
     public TelaLogin(){
         super("Tela de Login");
 
-        usuarioDao = new UsuarioDaoSet();
-        //Apenas enquanto não aprendemos persistência
-        usuarioDao.salvar(new Usuario("admin@gmail.com",
-                "admin",
-                LocalDate.now(),
-                "123456"));
+        try {
+            usuarioDao = new UsuarioDaoArquivo();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Falha na conexão com o arquivo",
+                    "Mensagem de erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(painel);
         pack();
+
         cadastrarButton.addActionListener(e -> {
             TelaCadastroUsuario cadastroUsuario = new TelaCadastroUsuario();
             cadastroUsuario.setVisible(true);
         });
         entrarButton.addActionListener(e -> {
-            Usuario usuario = usuarioDao
-                    .buscarPorEmail(campoEmail.getText());
+
+            Usuario usuario = null;
+            try {
+                usuario = usuarioDao
+                        .buscarPorEmail(campoEmail.getText());
+            } catch (IOException | ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(this,
+                        "Falha na conexão com o arquivo",
+                        "Mensagem de erro",
+                        JOptionPane.ERROR_MESSAGE);
+            }
 
             if(usuario == null){
                 JOptionPane.showMessageDialog(this,

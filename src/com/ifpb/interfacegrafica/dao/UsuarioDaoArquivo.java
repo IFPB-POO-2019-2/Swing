@@ -33,4 +33,20 @@ public class UsuarioDaoArquivo {
         ).findFirst().orElse(null);
     }
 
+    public boolean salvar(Usuario usuario) throws IOException,
+            ClassNotFoundException {
+        Set<Usuario> usuarios = getUsuarios();
+        return usuarios.add(usuario) && atualizarArquivo(usuarios);
+    }
+
+    private boolean atualizarArquivo(Set<Usuario> usuarios) throws IOException {
+        ObjectOutputStream out = new ObjectOutputStream(
+                new FileOutputStream(arquivo)
+        );
+        out.writeObject(usuarios);
+        return true;
+    }
+
+    //TODO Criar método de atualizar e remover
+
 }

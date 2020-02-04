@@ -10,6 +10,7 @@ public class Usuario implements Serializable {
     private String nome;
     private LocalDate nascimento;
     private String senha;
+    private static final long serialVersionUID = -3794774872648017318L;
 
     public Usuario(String email, String nome, LocalDate nascimento, String senha) {
         this.email = email;
@@ -65,5 +66,15 @@ public class Usuario implements Serializable {
 
     public boolean autenticar(String email, String senha){
         return this.email.equals(email) && this.senha.equals(senha);
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "email='" + email + '\'' +
+                ", nome='" + nome + '\'' +
+                ", nascimento=" + nascimento +
+                ", senha='" + senha + '\'' +
+                '}';
     }
 }

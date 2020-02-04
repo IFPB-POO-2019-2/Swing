@@ -1,10 +1,12 @@
 package com.ifpb.interfacegrafica.telas;
 
+import com.ifpb.interfacegrafica.dao.UsuarioDaoArquivo;
 import com.ifpb.interfacegrafica.dao.UsuarioDaoSet;
 import com.ifpb.interfacegrafica.modelo.Usuario;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -18,13 +20,20 @@ public class TelaCadastroUsuario extends JFrame {
     private JPasswordField campoSenha2;
     private JButton salvarButton;
     private JPanel painel;
-    private UsuarioDaoSet usuarioDao;
+    private UsuarioDaoArquivo usuarioDao;
     private DateTimeFormatter formatter;
 
     public TelaCadastroUsuario(){
         super("Cadastro de usuário");
 
-        usuarioDao = new UsuarioDaoSet();
+        try {
+            usuarioDao = new UsuarioDaoArquivo();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Falha na conexão com o arquivo",
+                    "Mensagem de erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
 
         formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -47,12 +56,19 @@ public class TelaCadastroUsuario extends JFrame {
                 String senha = new String(campoSenha1.getPassword());
 
                 Usuario usuario = new Usuario(email, nome, nascimento, senha);
-                if(usuarioDao.salvar(usuario)){
+                try {
+                    if(usuarioDao.salvar(usuario)){
+                        JOptionPane.showMessageDialog(this,
+                                "Salvo com sucesso");
+                    }else{
+                        JOptionPane.showMessageDialog(this,
+                                "Usuário já cadastrado",
+                                "Mensagem de erro",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (IOException | ClassNotFoundException ex) {
                     JOptionPane.showMessageDialog(this,
-                            "Salvo com sucesso");
-                }else{
-                    JOptionPane.showMessageDialog(this,
-                            "Usuário já cadastrado",
+                            "Falha na conexão com o arquivo",
                             "Mensagem de erro",
                             JOptionPane.ERROR_MESSAGE);
                 }
