@@ -1,9 +1,10 @@
 package com.ifpb.interfacegrafica.modelo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Usuario {
+public class Usuario implements Serializable {
 
     private String email;
     private String nome;

@@ -3,6 +3,7 @@ package com.ifpb.interfacegrafica.dao;
 import com.ifpb.interfacegrafica.modelo.Usuario;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class UsuarioDaoSet {
@@ -20,8 +21,7 @@ public class UsuarioDaoSet {
     public Usuario buscarPorEmail(String email){
         return usuarios.stream()
                 .filter(u -> u.getEmail().equals(email))
-                .findFirst()
-                .get();
+                .findFirst().orElse(null);
     }
 
 }
