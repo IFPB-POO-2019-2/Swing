@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UsuarioDaoBanco {
 
@@ -50,6 +52,26 @@ public class UsuarioDaoBanco {
                 return new Usuario(email, nome, nascimento, senha);
             }
             return null;
+        }
+    }
+
+    public Set<Usuario> getUsuarios() throws SQLException,
+            ClassNotFoundException {
+        try(Connection connection = conFactory.getConnection()){
+            PreparedStatement pstmt = connection.prepareStatement(
+                "SELECT * FROM usuario");
+            Set<Usuario> usuarios = new HashSet<>();
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                String email = rs.getString("email");
+                String nome = rs.getString("nome");
+                LocalDate nascimento = rs
+                        .getDate("nascimento").toLocalDate();
+                String senha = rs.getString("senha");
+                usuarios.add(new Usuario(email, nome, nascimento, senha));
+            }
+            return usuarios;
         }
     }
 
