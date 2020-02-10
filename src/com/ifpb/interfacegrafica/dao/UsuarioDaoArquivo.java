@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
 
-public class UsuarioDaoArquivo {
+public class UsuarioDaoArquivo implements UsuarioDao{
 
     private File arquivo;
 
@@ -16,6 +16,7 @@ public class UsuarioDaoArquivo {
         if(!arquivo.exists()) arquivo.createNewFile();
     }
 
+    @Override
     public Set<Usuario> getUsuarios() throws IOException,
             ClassNotFoundException {
         if(arquivo.length()>0){
@@ -26,6 +27,7 @@ public class UsuarioDaoArquivo {
         }else return new HashSet<>();
     }
 
+    @Override
     public Usuario buscarPorEmail(String email) throws IOException,
             ClassNotFoundException {
         return getUsuarios().stream().filter(
@@ -33,6 +35,7 @@ public class UsuarioDaoArquivo {
         ).findFirst().orElse(null);
     }
 
+    @Override
     public boolean salvar(Usuario usuario) throws IOException,
             ClassNotFoundException {
         Set<Usuario> usuarios = getUsuarios();

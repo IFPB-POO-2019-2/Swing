@@ -1,12 +1,15 @@
 package com.ifpb.interfacegrafica.telas;
 
+import com.ifpb.interfacegrafica.dao.UsuarioDao;
 import com.ifpb.interfacegrafica.dao.UsuarioDaoArquivo;
+import com.ifpb.interfacegrafica.dao.UsuarioDaoBanco;
 import com.ifpb.interfacegrafica.dao.UsuarioDaoSet;
 import com.ifpb.interfacegrafica.modelo.Usuario;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,20 +23,13 @@ public class TelaCadastroUsuario extends JFrame {
     private JPasswordField campoSenha2;
     private JButton salvarButton;
     private JPanel painel;
-    private UsuarioDaoArquivo usuarioDao;
+    private UsuarioDao usuarioDao;
     private DateTimeFormatter formatter;
 
     public TelaCadastroUsuario(){
         super("Cadastro de usuário");
 
-        try {
-            usuarioDao = new UsuarioDaoArquivo();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this,
-                    "Falha na conexão com o arquivo",
-                    "Mensagem de erro",
-                    JOptionPane.ERROR_MESSAGE);
-        }
+        usuarioDao = new UsuarioDaoBanco();
 
         formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -69,6 +65,11 @@ public class TelaCadastroUsuario extends JFrame {
                 } catch (IOException | ClassNotFoundException ex) {
                     JOptionPane.showMessageDialog(this,
                             "Falha na conexão com o arquivo",
+                            "Mensagem de erro",
+                            JOptionPane.ERROR_MESSAGE);
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this,
+                            "Usuário já cadastrado",
                             "Mensagem de erro",
                             JOptionPane.ERROR_MESSAGE);
                 }

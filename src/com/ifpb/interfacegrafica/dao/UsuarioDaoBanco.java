@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-public class UsuarioDaoBanco {
+public class UsuarioDaoBanco implements UsuarioDao{
 
     private ConFactory conFactory;
 
@@ -19,6 +19,7 @@ public class UsuarioDaoBanco {
         conFactory = new ConFactory();
     }
 
+    @Override
     public boolean salvar(Usuario usuario) throws SQLException,
             ClassNotFoundException {
         try(Connection connection = conFactory.getConnection()){
@@ -36,6 +37,7 @@ public class UsuarioDaoBanco {
 
     }
 
+    @Override
     public Usuario buscarPorEmail(String email) throws SQLException,
             ClassNotFoundException {
         try(Connection connection = conFactory.getConnection()){
@@ -55,6 +57,7 @@ public class UsuarioDaoBanco {
         }
     }
 
+    @Override
     public Set<Usuario> getUsuarios() throws SQLException,
             ClassNotFoundException {
         try(Connection connection = conFactory.getConnection()){

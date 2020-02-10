@@ -1,11 +1,14 @@
 package com.ifpb.interfacegrafica.telas;
 
+import com.ifpb.interfacegrafica.dao.UsuarioDao;
 import com.ifpb.interfacegrafica.dao.UsuarioDaoArquivo;
+import com.ifpb.interfacegrafica.dao.UsuarioDaoBanco;
 import com.ifpb.interfacegrafica.dao.UsuarioDaoSet;
 import com.ifpb.interfacegrafica.modelo.Usuario;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class TelaLogin extends JFrame {
     private JTextField campoEmail;
@@ -14,19 +17,12 @@ public class TelaLogin extends JFrame {
     private JButton cadastrarButton;
     private JPanel painel;
     private JLabel loginImagem;
-    private UsuarioDaoArquivo usuarioDao;
+    private UsuarioDao usuarioDao;
 
     public TelaLogin(){
         super("Tela de Login");
 
-        try {
-            usuarioDao = new UsuarioDaoArquivo();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this,
-                    "Falha na conexão com o arquivo",
-                    "Mensagem de erro",
-                    JOptionPane.ERROR_MESSAGE);
-        }
+        usuarioDao = new UsuarioDaoBanco();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setContentPane(painel);
@@ -45,6 +41,11 @@ public class TelaLogin extends JFrame {
             } catch (IOException | ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(this,
                         "Falha na conexão com o arquivo",
+                        "Mensagem de erro",
+                        JOptionPane.ERROR_MESSAGE);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this,
+                        "Falha na conexão com o banco",
                         "Mensagem de erro",
                         JOptionPane.ERROR_MESSAGE);
             }
