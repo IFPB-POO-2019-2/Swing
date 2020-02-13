@@ -56,8 +56,8 @@ public class TelaLogin extends JFrame {
             }else{
                 if(usuario.autenticar(campoEmail.getText(),
                         new String(campoSenha.getPassword()))){
-                    JOptionPane.showMessageDialog(this,
-                            "Logado");
+                    TelaVisualizarUsuarios usuarios = new TelaVisualizarUsuarios();
+                    usuarios.setVisible(true);
                 }else{
                     JOptionPane.showMessageDialog(this,
                             "Senha incorreta");
